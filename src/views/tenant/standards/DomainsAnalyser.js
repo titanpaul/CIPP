@@ -25,7 +25,7 @@ const RefreshAction = () => {
         <div>
           Are you sure you want to force the Domain Analysis to run? This will slow down normal
           usage considerably. <br />
-          <i>Please note: this runs at midnight automatically every day.</i>
+          <i>Please note: this runs at 4:30 AM UTC automatically every day.</i>
         </div>
       ),
       onConfirm: () => execDomainsAnalyser(),
@@ -274,6 +274,12 @@ const DomainsAnalyser = () => {
       tenantSelector={true}
       showAllTenantSelector={true}
       datatable={{
+        filterlist: [
+          {
+            filterName: 'Exclude onmicrosoft domains',
+            filter: 'Complex: domain notlike onmicrosoft',
+          },
+        ],
         path: `/api/DomainAnalyser_List`,
         params: { tenantFilter: currentTenant.defaultDomainName },
         columns,
